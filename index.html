@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #on {
+      width: 200px;
+      height: 50px;
+      background-color: pink;
+    }
+
+    #off {
+      width: 200px;
+      height: 50px;
+      background-color: rgb(192, 246, 255);
+    }
+  </style>
+</head>
+<body>
+  <h1>水やり</h1>
+  <div id="on">
+    ON
+  </div>
+
+  <div id="off">
+    OFF
+  </div>
+
+
+
+  <script>
+
+    const on_btn = document.getElementById("on")
+    const off_btn = document.getElementById("off")
+
+    on_btn.addEventListener("click", () => {
+      sendData('on')
+    })
+    
+    off_btn.addEventListener("click", () => {
+      sendData('off')
+    })
+
+    // リクエストの作成
+    
+    function sendData(mozi) {
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', mozi);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      
+      // リクエストの送信とレスポンスの処理
+      xhr.onload = () => {
+          if (xhr.status === 200) {
+              console.log('送信成功:', xhr.responseText);
+          } else {
+              console.error('送信失敗:', xhr.statusText);
+          }
+      };
+      xhr.send();
+    } 
+
+  </script>
+</body>
+</html>
